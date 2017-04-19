@@ -34,6 +34,10 @@ static NSInteger tag = 100000;
     if (![styleOptions objectForKey:@"bgColor"]) {
         [styleOptions setObject:[UIColor clearColor] forKey:@"bgColor"];
     }
+    if (![styleOptions objectForKey:@"loadingStyle"]) {
+        [styleOptions setObject:[NSNumber numberWithInteger:UIActivityIndicatorViewStyleWhite] forKey:@"loadingStyle"];
+
+    }
     UIView *loadingView = [[UIView alloc]initWithFrame:self.bounds];
     loadingView.backgroundColor = [styleOptions objectForKey:@"bgColor"];
     UILabel *tipLabel = [UILabel new];
@@ -47,6 +51,7 @@ static NSInteger tag = 100000;
     tipLabel.frame = CGRectMake((CGRectGetWidth(self.frame) - width) * 0.5 + height, (CGRectGetHeight(self.frame) - height) * 0.5, width, height);
     [loadingView addSubview:tipLabel];
     UIActivityIndicatorView *indcatorView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(CGRectGetMinX(tipLabel.frame) - padding - height, CGRectGetMinY(tipLabel.frame), height, height)];
+    [indcatorView setActivityIndicatorViewStyle:[[styleOptions objectForKey:@"loadingStyle"] integerValue]];
     loadingView.tag = tag;
     [loadingView addSubview:indcatorView];
     [self addSubview:loadingView];
